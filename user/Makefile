@@ -11,7 +11,7 @@ OBJDUMP := rust-objdump --arch-name=riscv64
 OBJCOPY := rust-objcopy --binary-architecture=riscv64
 
 elf:
-	RUSTFLAGS=$(FLAGS) cargo build --release
+	cargo build --release
 	@echo $(APPS)
 	@echo $(ELFS)
 	@echo $(BINS)
