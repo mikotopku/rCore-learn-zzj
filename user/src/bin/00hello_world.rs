@@ -6,6 +6,6 @@ extern crate user_lib;
 
 #[unsafe(no_mangle)]
 fn main() -> i32 {
-    println!("Hello, world!");
+    user_lib::write(user_lib::console::STDOUT, b"hello\n");
     0
 }
