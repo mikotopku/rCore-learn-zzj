@@ -5,6 +5,7 @@
 pub mod console;
 mod lang_items;
 mod syscall;
+pub mod taskinfo;
 
 #[unsafe(no_mangle)]
 #[unsafe(link_section = ".text.entry")]
@@ -31,6 +32,7 @@ fn clear_bss() {
 }
 
 use syscall::*;
+use taskinfo::TaskInfo;
 
 pub fn write(fd: usize, buf: &[u8]) -> isize {
     sys_write(fd, buf)
@@ -43,4 +45,8 @@ pub fn yield_() -> isize {
 }
 pub fn get_time() -> isize {
     sys_get_time()
+}
+
+pub fn taskinfo(id: usize, ts: *mut TaskInfo) -> isize {
+    sys_task_info(id, ts)
 }
