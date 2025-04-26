@@ -20,9 +20,6 @@ fn main() -> i32 {
             }
             println!("{}\t{}\t{}\t", pti.id, pti.status.to_str(), pti.time);
             for scinfo in pti.call {
-                if scinfo.id == 0 {
-                    break;
-                }
                 println!("\t\t\t{}\t{}", scinfo.id, scinfo.times);
             }
             i += 1;
