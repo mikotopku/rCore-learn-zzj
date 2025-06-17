@@ -1,3 +1,5 @@
+use core::clone;
+
 use super::{
     block_cache_sync_all, get_block_cache, BlockDevice, DirEntry, DiskInode, DiskInodeType,
     EasyFileSystem, DIRENT_SZ,
@@ -28,6 +30,92 @@ impl Inode {
             fs,
             block_device,
         }
+    }
+    /// only root inode will be called
+    pub fn create_hard_link(
+        &self, 
+        old_path: &str, 
+        new_path: &str,
+    ) -> isize {
+        if old_path == new_path { return -1; }
+        let mut fs = self.fs.lock();
+        let mut oldsize = 0;
+        self.modify_disk_inode(|root_inode| {
+            oldsize = root_inode.size;
+            self.increase_size(root_inode.size + DIRENT_SZ as u32, root_inode, &mut fs);
+        });
+        drop(fs);
+        let oldinode = self.find(old_path);
+        let fs = self.fs.lock();
+        if let Some(inode) = oldinode {
+            let oldid = fs.get_inode_id(inode.block_id as u32, inode.block_offset);
+            drop(fs);
+            let mut newent = DirEntry::new(new_path, oldid);
+            assert!(self.write_at(oldsize as usize, newent.as_bytes_mut()) == DIRENT_SZ);
+            0
+        }else {
+            -1
+        }
+    }
+    /// only root inode will be called
+    pub fn delete_hard_link(&self, path: &str) -> isize {
+        let oldsize = self.read_disk_inode(|disk_inode| { disk_inode.size });
+        let entnum = oldsize as usize / DIRENT_SZ;
+        let mut ret = -1;
+        let mut i = 0;
+        let mut ents = Vec::<DirEntry>::new();
+        while i < entnum {
+            let mut ent = DirEntry::empty();
+            assert!(self.read_at(i * DIRENT_SZ, ent.as_bytes_mut()) ==  DIRENT_SZ);
+            if ent.name() == path {
+                ret = 0;
+            } else {
+                ents.push(ent);
+            }
+            i += 1;
+        }
+        if ret == 0 {
+            self.clear();
+            let mut fs = self.fs.lock();
+            self.modify_disk_inode(|root_inode| {
+                self.increase_size(oldsize - DIRENT_SZ as u32, root_inode, &mut fs);
+            });
+            drop(fs);
+            i = 0;
+            while i < ents.len() {
+                assert!(self.write_at(i * DIRENT_SZ, ents[i].as_bytes()) == DIRENT_SZ);
+                i += 1;
+            }
+        }
+        ret
+    }
+    /// only root inode will be called
+    pub fn hard_link_cnt(&self, child: &Inode) -> u32 {
+        let id = child.inode_id();
+        let mut cnt = 0;
+        let entnum = self.read_disk_inode(
+            |root_inode| { root_inode.size as usize / DIRENT_SZ}
+        );
+        for i in 0..entnum {
+            let mut ent = DirEntry::empty();
+            self.read_at(i * DIRENT_SZ, ent.as_bytes_mut());
+            if ent.inode_number() == id {
+                cnt += 1;
+            }
+        }
+        cnt
+    }
+    /// 
+    pub fn inode_id(&self) -> u32 {
+        self.fs.lock().get_inode_id(self.block_id as u32, self.block_offset)
+    }
+    ///
+    pub fn is_dir(&self) -> bool {
+        self.read_disk_inode(|disk_inode| {disk_inode.is_dir()})
+    }
+    ///
+    pub fn is_file(&self) -> bool  {
+        self.read_disk_inode(|disk_inode| {disk_inode.is_file()})
     }
     /// Call a function over a disk inode to read it
     fn read_disk_inode<V>(&self, f: impl FnOnce(&DiskInode) -> V) -> V {

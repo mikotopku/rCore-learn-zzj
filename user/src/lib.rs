@@ -8,6 +8,7 @@ pub mod console;
 mod lang_items;
 mod syscall;
 pub mod taskinfo;
+pub mod fs;
 use buddy_system_allocator::LockedHeap;
 use bitflags::bitflags;
 
@@ -42,6 +43,8 @@ fn main() -> i32 {
 
 use syscall::*;
 use taskinfo::TaskInfo;
+
+use crate::fs::Stat;
 
 bitflags! {
     pub struct OpenFlags: u32 {
@@ -131,4 +134,16 @@ pub fn sleep(period_ms: usize) {
 
 pub fn set_priority(prio: u8) -> isize {
     sys_set_priority(prio)
+}
+
+pub fn linkat(oldpath: &str, newpath: &str) -> isize {
+    sys_linkat(0, oldpath.as_ptr(), 0, newpath.as_ptr(), 0)
+}
+
+pub fn unlinkat(path: &str) -> isize {
+    sys_unlinkat(0, path.as_ptr(), 0)
+}
+
+pub fn fstat(fd: i32, st: *mut Stat) -> isize {
+    sys_fstat(fd, st)
 }
