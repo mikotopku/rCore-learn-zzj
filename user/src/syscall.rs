@@ -1,6 +1,8 @@
 use core::arch::asm;
-use crate::{fs::Stat, taskinfo::TaskInfo};
+use crate::{fs::Stat, taskinfo::TaskInfo, SignalAction};
 
+const SYSCALL_DUP: usize = 24;
+const SYSCALL_PIPE: usize = 59;
 const SYSCALL_OPEN: usize = 56;
 const SYSCALL_CLOSE: usize = 57;
 const SYSCALL_READ: usize = 63;
@@ -20,7 +22,11 @@ const SYSCALL_SET_PRIORITY: usize = 140;
 const SYSCALL_LINKAT: usize = 37;
 const SYSCALL_UNLINKAT: usize = 35;
 const SYSCALL_FSTAT: usize = 80;
-pub const MAX_SYSCALL_NUM: usize = 19;
+const SYSCALL_SIGACTION: usize = 134;
+const SYSCALL_SIGPROCMASK: usize = 135;
+const SYSCALL_SIGRETURN: usize = 139;
+const SYSCALL_KILL: usize = 129;
+pub const MAX_SYSCALL_NUM: usize = 25;
 
 fn syscall(id: usize, args: [usize; 7]) -> isize {
     let mut ret: isize;
@@ -40,6 +46,14 @@ fn syscall(id: usize, args: [usize; 7]) -> isize {
     ret
 }
 
+pub fn sys_dup(fd: usize) -> isize {
+    syscall(SYSCALL_DUP, [fd, 0, 0, 0, 0, 0, 0])
+}
+
+pub fn sys_pipe(pipe: &mut [usize]) -> isize {
+    syscall(SYSCALL_PIPE, [pipe.as_mut_ptr() as usize, 0, 0, 0, 0, 0, 0])
+}
+
 pub fn sys_open(path: &str, flags: u32) -> isize {
     syscall(SYSCALL_OPEN, [path.as_ptr() as usize, flags as usize, 0, 0, 0, 0, 0])
 }
@@ -57,8 +71,9 @@ pub fn sys_write(fd: usize, buffer: &[u8]) -> isize {
     syscall(SYSCALL_WRITE, [fd, buffer.as_ptr() as usize, buffer.len(), 0, 0, 0, 0])
 }
 
-pub fn sys_exit(exit_code: i32) -> isize {
-    syscall(SYSCALL_EXIT, [exit_code as usize, 0, 0, 0, 0, 0, 0])
+pub fn sys_exit(exit_code: i32) -> ! {
+    syscall(SYSCALL_EXIT, [exit_code as usize, 0, 0, 0, 0, 0, 0]);
+    panic!();
 }
 
 pub fn sys_yield() -> isize {
@@ -89,12 +104,14 @@ pub fn sys_fork() -> isize {
     syscall(SYSCALL_FORK, [0;7])
 }
 
-pub fn sys_exec(path: &str) -> isize {
-    syscall(SYSCALL_EXEC, [path.as_ptr() as usize, 0, 0, 0, 0, 0, 0])
+pub fn sys_exec(path: &str, args: &[*const u8]) -> isize {
+    syscall(
+        SYSCALL_EXEC,
+        [path.as_ptr() as usize, args.as_ptr() as usize, 0, 0, 0, 0, 0],
+    )
 }
-
-pub fn sys_spawn(path: &str) -> isize {
-    syscall(SYSCALL_SPAWN, [path.as_ptr() as usize, 0, 0, 0, 0, 0, 0])
+pub fn sys_spawn(path: &str, args: &[*const u8]) -> isize {
+    syscall(SYSCALL_SPAWN, [path.as_ptr() as usize, args.as_ptr() as usize, 0, 0, 0, 0, 0])
 }
 
 pub fn sys_waitpid(pid: isize, exit_code: *mut i32) -> isize {
@@ -115,4 +132,37 @@ pub fn sys_unlinkat(dirfd: i32, path: *const u8, flags: u32) -> isize {
 
 pub fn sys_fstat(fd: i32, st: *mut Stat) -> isize {
     syscall(SYSCALL_FSTAT, [fd as usize, st as usize, 0, 0, 0, 0, 0])
+}
+
+pub fn sys_kill(pid: usize, signal: i32) -> isize {
+    syscall(SYSCALL_KILL, [pid, signal as usize, 0, 0, 0, 0, 0])
+}
+
+pub fn sys_sigaction(
+    signum: i32,
+    action: *const SignalAction,
+    old_action: *mut SignalAction,
+) -> isize {
+    syscall(
+        SYSCALL_SIGACTION,
+        [signum as usize, action as usize, old_action as usize, 0, 0, 0, 0],
+    )
+    /*
+    syscall(
+        SYSCALL_SIGACTION,
+        [
+            signum as usize,
+            action.map_or(0, |r| r as *const _ as usize),
+            old_action.map_or(0, |r| r as *mut _ as usize),
+        ],
+    )
+    */
+}
+
+pub fn sys_sigprocmask(mask: u32) -> isize {
+    syscall(SYSCALL_SIGPROCMASK, [mask as usize, 0, 0, 0, 0, 0, 0])
+}
+
+pub fn sys_sigreturn() -> isize {
+    syscall(SYSCALL_SIGRETURN, [0;7])
 }

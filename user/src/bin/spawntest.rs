@@ -9,7 +9,7 @@ extern crate user_lib;
 #[unsafe(no_mangle)]
 pub fn main() -> i32 {
     println!("spawning hello_world");
-    let pid = spawn("hello_world\0");
+    let pid = spawn("hello_world\0", &[core::ptr::null()]);
     if pid <= 0 {
         println!("spawn failed");
         exit(-114);

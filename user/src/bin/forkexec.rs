@@ -16,7 +16,7 @@ pub fn main() -> i32 {
             "pid {}: forked child start execing hello_world app ... ",
             getpid()
         );
-        println!("{}", exec("hello_world\0"));
+        println!("{}", exec("hello_world\0", &[core::ptr::null()]));
         100
     } else {
         // parent process
