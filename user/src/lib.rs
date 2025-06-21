@@ -283,3 +283,24 @@ pub fn sigreturn() -> isize {
     sys_sigreturn()
 }
 
+pub const MAIL_MAXLEN: usize = 256;
+
+pub fn mailread_available() -> bool {
+    sys_mailread(core::ptr::null_mut(), 0) == 0
+}
+
+pub fn mailwrite_available(pid: usize) -> bool {
+    sys_mailwrite(pid, core::ptr::null(), 0) == 0
+}
+
+pub fn mailread(buf: &mut [u8]) -> isize {
+    sys_mailread(buf.as_mut_ptr(), buf.len())
+}
+
+pub fn mailwrite(pid: usize, buf: &[u8]) -> isize {
+    if buf.len() > MAIL_MAXLEN {
+        sys_mailwrite(pid, buf[0..MAIL_MAXLEN].as_ptr(), MAIL_MAXLEN)
+    }else {
+        sys_mailwrite(pid, buf.as_ptr(), buf.len())
+    }
+}

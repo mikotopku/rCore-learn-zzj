@@ -26,7 +26,9 @@ const SYSCALL_SIGACTION: usize = 134;
 const SYSCALL_SIGPROCMASK: usize = 135;
 const SYSCALL_SIGRETURN: usize = 139;
 const SYSCALL_KILL: usize = 129;
-pub const MAX_SYSCALL_NUM: usize = 25;
+const SYSCALL_MAILREAD: usize = 401;
+const SYSCALL_MAILWRITE: usize = 402;
+pub const MAX_SYSCALL_NUM: usize = 27;
 
 fn syscall(id: usize, args: [usize; 7]) -> isize {
     let mut ret: isize;
@@ -165,4 +167,12 @@ pub fn sys_sigprocmask(mask: u32) -> isize {
 
 pub fn sys_sigreturn() -> isize {
     syscall(SYSCALL_SIGRETURN, [0;7])
+}
+
+pub fn sys_mailread(buf: *mut u8, len: usize) -> isize {
+    syscall(SYSCALL_MAILREAD, [buf as usize, len, 0, 0, 0 ,0, 0])
+}
+
+pub fn sys_mailwrite(pid: usize, buf: *const u8, len: usize) -> isize {
+    syscall(SYSCALL_MAILWRITE, [pid, buf as usize, len, 0, 0, 0, 0])
 }
