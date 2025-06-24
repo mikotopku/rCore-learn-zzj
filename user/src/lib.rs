@@ -222,3 +222,14 @@ macro_rules! memory_fence {
         core::sync::atomic::fence(core::sync::atomic::Ordering::SeqCst)
     };
 }
+
+bitflags! {
+    pub struct EFDFlags: usize {
+        const EFD_SEMAPHORE = 1;
+        const EFD_NONBLOCK = 2048;
+    }
+}
+
+pub fn eventfd(initval: usize, flags: EFDFlags) -> isize {
+    sys_eventfd(initval, flags.bits())
+}
