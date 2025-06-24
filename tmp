@@ -1,0 +1,542 @@
+[DEBUG] 1 try sem 1 down
+[DEBUG] 1 sem 1 down
+[DEBUG] 1 try sem 2 down
+[DEBUG] 1 sem 2 down
+[DEBUG] 1 sem 2 up
+[DEBUG] 1 sem 0 up
+[DEBUG] 1 try sem 1 down
+[DEBUG] 1 sem 1 down
+[DEBUG] 1 try sem 2 down
+[DEBUG] 1 sem 2 down
+j
+[DEBUG] 2 try sem 1 down
+[DEBUG] 2 sem 1 down
+[DEBUG] 2 try sem 2 down
+j
+[DEBUG] 3 try sem 1 down
+[DEBUG] 3 sem 1 down
+[DEBUG] 3 try sem 2 down
+j
+[DEBUG] 4 try sem 1 down
+[DEBUG] 4 sem 1 down
+j
+[DEBUG] 5 try sem 1 down
+[DEBUG] 5 sem 1 down
+[DEBUG] 5 try sem 2 down
+u
+[DEBUG] 6 try sem 0 down
+[DEBUG] 6 sem 0 down
+[DEBUG] 6 try sem 2 down
+u
+[DEBUG] 7 try sem 0 down
+u
+[DEBUG] 8 try sem 0 down
+u
+u
+[DEBUG] 10 try sem 0 down
+[DEBUG] wakeup
+[DEBUG] 1 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 1 sem 0 up
+[DEBUG] 1 try sem 1 down
+[DEBUG] 1 sem 1 down
+[DEBUG] 1 try sem 2 down
+[DEBUG] 4 try sem 2 down
+[DEBUG] 2 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 2 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 2 sem 0 up
+[DEBUG] 2 try sem 1 down
+[DEBUG] 2 sem 1 down
+[DEBUG] 2 try sem 2 down
+[DEBUG] 7 sem 0 down
+[DEBUG] 7 try sem 2 down
+[DEBUG] 9 try sem 0 down
+[DEBUG] 3 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 3 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 3 sem 0 up
+[DEBUG] 3 try sem 1 down
+[DEBUG] 3 sem 1 down
+[DEBUG] 3 try sem 2 down
+[DEBUG] 8 sem 0 down
+[DEBUG] 5 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 5 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 5 sem 0 up
+[DEBUG] 5 try sem 1 down
+[DEBUG] 5 sem 1 down
+[DEBUG] 5 try sem 2 down
+[DEBUG] 10 sem 0 down
+[DEBUG] 8 try sem 2 down
+[DEBUG] 6 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 6 sem 2 up
+[DEBUG] 6 sem 1 up
+[DEBUG] 6 try lock 4
+[DEBUG] 6 lock mut 4
+[DEBUG] 6 try lock 9
+[DEBUG] 6 lock mut 9
+(1000, [DEBUG] 9 sem 0 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 10 try sem 2 down
+[DEBUG] 1 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 1 sem 2 up
+[DEBUG] 1 sem 0 up
+[DEBUG] 1 try sem 1 down
+[DEBUG] 1 sem 1 down
+1000) (4, 9, P2) (-20, 20)
+[DEBUG] 6 unlock mut 9
+[DEBUG] 6 unlock mut 4
+[DEBUG] 6 try sem 0 down
+[DEBUG] 6 sem 0 down
+[DEBUG] 4 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 4 sem 2 up
+[DEBUG] 4 sem 0 up
+[DEBUG] 4 try sem 1 down
+[DEBUG] 4 sem 1 down
+[DEBUG] 4 try sem 2 down
+[DEBUG] 1 try sem 2 down
+[DEBUG] 6 try sem 2 down
+[DEBUG] 2 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 2 sem 2 up
+[DEBUG] 2 sem 0 up
+[DEBUG] 2 try sem 1 down
+[DEBUG] 2 sem 1 down
+[DEBUG] 7 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 7 sem 2 up
+[DEBUG] 7 sem 1 up
+[DEBUG] 7 try lock 4
+[DEBUG] 7 lock mut 4
+[DEBUG] 7 try lock 7
+[DEBUG] 7 lock mut 7
+([DEBUG] 2 try sem 2 down
+[DEBUG] 3 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 3 sem 2 up
+[DEBUG] 3 sem 0 up
+[DEBUG] 3 try sem 1 down
+[DEBUG] 3 sem 1 down
+[DEBUG] 3 try sem 2 down
+980, 1000) (4, 7, P1)[DEBUG] 5 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 5 sem 2 up
+[DEBUG] 5 sem 0 up
+[DEBUG] 5 try sem 1 down
+[DEBUG] 5 sem 1 down
+ (30, -30)
+[DEBUG] 7 unlock mut 7
+[DEBUG] 7 unlock mut 4
+[DEBUG] 7 try sem 0 down
+[DEBUG] 7 sem 0 down
+[DEBUG] 7 try sem 2 down
+[DEBUG] 8 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 8 sem 2 up
+[DEBUG] 8 sem 1 up
+[DEBUG] 8 try lock 9
+[DEBUG] 8 lock mut 9
+[DEBUG] 8 try lock 9
+[DEBUG] 9 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 9 sem 2 up
+[DEBUG] 9 sem 1 up
+[DEBUG] 9 try lock 1
+[DEBUG] 9 lock mut 1
+[DEBUG] 9 try lock 6
+[DEBUG] 9 lock mut 6
+[DEBUG] 5 try sem 2 down
+[DEBUG] 10 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 10 sem 2 up
+[DEBUG] 10 sem 1 up
+[DEBUG] 10 try lock 1
+(1000, 1000) (1, 6, P2) (-20, 20)
+[DEBUG] 9 unlock mut 6
+[DEBUG] 9 unlock mut 1
+[DEBUG] 9 try sem 0 down
+[DEBUG] 9 sem 0 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 4 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 4 sem 2 up
+[DEBUG] 4 sem 0 up
+[DEBUG] 4 try sem 1 down
+[DEBUG] 4 sem 1 down
+[DEBUG] 4 try sem 2 down
+[DEBUG] 10 lock mut 1
+[DEBUG] 1 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 1 sem 2 up
+[DEBUG] 1 sem 0 up
+[DEBUG] 1 try sem 1 down
+[DEBUG] 1 sem 1 down
+[DEBUG] 1 try sem 2 down
+[DEBUG] 10 try lock 6
+[DEBUG] 10 lock mut 6
+[DEBUG] 6 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 6 sem 2 up
+[DEBUG] 6 sem 1 up
+[DEBUG] 6 try lock 4
+[DEBUG] 6 lock mut 4
+[DEBUG] 6 try lock 7
+[DEBUG] 6 lock mut 7
+(1010, 970) (980, 1020) (1, 6, DRAW) (10, -10)
+[DEBUG] 10 unlock mut 6
+[DEBUG] 10 unlock mut 1
+[DEBUG] 10 try sem 0 down
+[DEBUG] 10 sem 0 down
+[DEBUG] 10 try sem 2 down
+[DEBUG] 2 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 2 sem 2 up
+[DEBUG] 2 sem 0 up
+(4, 7, P1) (20, -20)
+[DEBUG] 6 unlock mut 7
+[DEBUG] 6 unlock mut 4
+[DEBUG] 6 try sem 0 down
+[DEBUG] 6 sem 0 down
+[DEBUG] 6 try sem 2 down
+[DEBUG] 3 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 3 sem 2 up
+[DEBUG] 2 try sem 1 down
+[DEBUG] 2 sem 1 down
+[DEBUG] 2 try sem 2 down
+[DEBUG] 7 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 7 sem 2 up
+[DEBUG] 7 sem 1 up
+[DEBUG] 7 try lock 5
+[DEBUG] 7 lock mut 5
+[DEBUG] 7 try lock 9
+[DEBUG] 3 sem 0 up
+[DEBUG] 3 try sem 1 down
+[DEBUG] 3 sem 1 down
+[DEBUG] 3 try sem 2 down
+[DEBUG] 5 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 5 sem 2 up
+[DEBUG] 5 sem 0 up
+[DEBUG] 5 try sem 1 down
+[DEBUG] 5 sem 1 down
+[DEBUG] 5 try sem 2 down
+[DEBUG] 9 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 9 sem 2 up
+[DEBUG] 9 sem 1 up
+[DEBUG] 9 try lock 2
+[DEBUG] 9 lock mut 2
+[DEBUG] 9 try lock 4
+[DEBUG] 9 lock mut 4
+[DEBUG] 4 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 4 sem 2 up
+[DEBUG] 4 sem 0 up
+[DEBUG] 4 try sem 1 down
+[DEBUG] 4 sem 1 down
+[DEBUG] 4 try sem 2 down
+[DEBUG] 1 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 1 sem 2 up
+[DEBUG] 1 sem 0 up
+[DEBUG] 1 try sem 1 down
+[DEBUG] 1 sem 1 down
+[DEBUG] 1 try sem 2 down
+[DEBUG] 10 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 10 sem 2 up
+[DEBUG] 10 sem 1 up
+[DEBUG] 10 try lock 1
+[DEBUG] 10 lock mut 1
+[DEBUG] 10 try lock 4
+(1000, 1030) (2, 4, [DEBUG] 6 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 6 sem 2 up
+[DEBUG] 6 sem 1 up
+[DEBUG] 6 try lock 9
+DRAW) (10, -10)
+[DEBUG] 9 unlock mut 4
+[DEBUG] 2 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 2 sem 2 up
+[DEBUG] 2 sem 0 up
+[DEBUG] 2 try sem 1 down
+[DEBUG] 2 sem 1 down
+[DEBUG] 10 lock mut 4
+(990, 1020) (1, 4, P2) (-20, 20)
+[DEBUG] 10 unlock mut 4
+[DEBUG] 9 unlock mut 2
+[DEBUG] 9 try sem 0 down
+[DEBUG] 9 sem 0 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 3 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 3 sem 2 up
+[DEBUG] 3 sem 0 up
+[DEBUG] 3 try sem 1 down
+[DEBUG] 3 sem 1 down
+[DEBUG] 2 try sem 2 down
+[DEBUG] 10 unlock mut 1
+[DEBUG] 10 try sem 0 down
+[DEBUG] 10 sem 0 down
+[DEBUG] 10 try sem 2 down
+[DEBUG] 5 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 5 sem 2 up
+[DEBUG] 3 try sem 2 down
+[DEBUG] 4 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 4 sem 2 up
+[DEBUG] 4 sem 0 up
+[DEBUG] 4 try sem 1 down
+[DEBUG] 4 sem 1 down
+[DEBUG] 4 try sem 2 down
+[DEBUG] 5 sem 0 up
+[DEBUG] 5 try sem 1 down
+[DEBUG] 5 sem 1 down
+[DEBUG] 5 try sem 2 down
+[DEBUG] 1 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 1 sem 2 up
+[DEBUG] 1 sem 0 up
+[DEBUG] 1 try sem 1 down
+[DEBUG] 9 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 9 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 9 sem 1 up
+[DEBUG] 2 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 2 sem 2 up
+[DEBUG] 2 sem 0 up
+[DEBUG] 2 try sem 1 down
+[DEBUG] 1 sem 1 down
+[DEBUG] 1 try sem 2 down
+[DEBUG] 9 try lock 0
+[DEBUG] 9 lock mut 0
+[DEBUG] 9 try lock 3
+[DEBUG] 9 lock mut 3
+[DEBUG] 10 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 10 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 10 sem 1 up
+[DEBUG] 10 try lock 0
+(1000, 1000) (0, 3, DRAW[DEBUG] 3 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 3 sem 2 up
+[DEBUG] 3 sem 0 up
+[DEBUG] 3 try sem 1 down
+[DEBUG] 2 sem 1 down
+[DEBUG] 2 try sem 2 down
+) (0, 0)
+[DEBUG] 4 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 4 sem 2 up
+[DEBUG] 4 sem 0 up
+[DEBUG] 4 try sem 1 down
+[DEBUG] 9 unlock mut 3
+[DEBUG] 9 unlock mut 0
+[DEBUG] 9 try sem 0 down
+[DEBUG] 9 sem 0 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 5 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 5 sem 2 up
+[DEBUG] 5 sem 0 up
+[DEBUG] 5 try sem 1 down
+[DEBUG] 10 lock mut 0
+[DEBUG] 10 try lock 7
+[DEBUG] 10 lock mut 7
+(1000, 950) (0, 7, DRAW) (-10, 10)
+[DEBUG] 10 unlock mut 7
+[DEBUG] 10 unlock mut 0
+[DEBUG] 10 try sem 0 down
+[DEBUG] 10 sem 0 down
+[DEBUG] 1 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 1 sem 2 up
+[DEBUG] 1 sem 0 up
+[DEBUG] 1 try sem 1 down
+[DEBUG] 2 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 2 sem 2 up
+[DEBUG] 2 sem 0 up
+[DEBUG] 2 try sem 1 down
+[DEBUG] 10 try sem 2 down
+[DEBUG] 9 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 9 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 9 sem 1 up
+[DEBUG] 9 try lock 3
+[DEBUG] 9 lock mut 3
+[DEBUG] 10 sem 2 down
+[DEBUG] 10 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 10 sem 1 up
+[DEBUG] 10 try lock 5
+[DEBUG] 3 sem 1 down
+[DEBUG] 3 try sem 2 down
+[DEBUG] 3 sem 2 down
+[DEBUG] 9 try lock 4
+[DEBUG] 9 lock mut 4
+(1000, 1040) (3, 4, P2) (-20, 20)
+[DEBUG] 9 unlock mut 4
+[DEBUG] 9 unlock mut 3
+[DEBUG] 9 try sem 0 down
+[DEBUG] 9 sem 0 down
+[DEBUG] 4 sem 1 down
+[DEBUG] 4 try sem 2 down
+[DEBUG] wakeup
+[DEBUG] 3 sem 2 up
+[DEBUG] 3 sem 0 up
+[DEBUG] 3 try sem 1 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 4 sem 2 down
+[DEBUG] wakeup
+[DEBUG] 4 sem 2 up
+[DEBUG] 4 sem 0 up
+[DEBUG] 4 try sem 1 down
+[DEBUG] 9 sem 2 down
+[DEBUG] 9 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 9 sem 1 up
+[DEBUG] 5 sem 1 down
+[DEBUG] 5 try sem 2 down
+[DEBUG] 5 sem 2 down
+[DEBUG] 5 sem 2 up
+[DEBUG] 5 sem 0 up
+[DEBUG] 5 try sem 1 down
+[DEBUG] 9 try lock 1
+[DEBUG] 9 lock mut 1
+[DEBUG] 9 try lock 3
+[DEBUG] 9 lock mut 3
+(970, 980) (1, 3, P2) (-20, 20)
+[DEBUG] 9 unlock mut 3
+[DEBUG] 9 unlock mut 1
+[DEBUG] 9 try sem 0 down
+[DEBUG] 9 sem 0 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 9 sem 2 down
+[DEBUG] 9 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 9 sem 1 up
+[DEBUG] 1 sem 1 down
+[DEBUG] 1 try sem 2 down
+[DEBUG] 1 sem 2 down
+[DEBUG] 1 sem 2 up
+[DEBUG] 1 sem 0 up
+[DEBUG] 1 try sem 1 down
+[DEBUG] 9 try lock 2
+[DEBUG] 9 lock mut 2
+[DEBUG] 9 try lock 7
+[DEBUG] 9 lock mut 7
+(1010, 960) (2, 7, P1) (20, -20)
+[DEBUG] 9 unlock mut 7
+[DEBUG] 9 unlock mut 2
+[DEBUG] 9 try sem 0 down
+[DEBUG] 9 sem 0 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 9 sem 2 down
+[DEBUG] 9 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 9 sem 1 up
+[DEBUG] 9 try lock 0
+[DEBUG] 9 lock mut 0
+[DEBUG] 9 try lock 2
+[DEBUG] 9 lock mut 2
+(990, 1030) [DEBUG] 2 sem 1 down
+[DEBUG] 2 try sem 2 down
+[DEBUG] 2 sem 2 down
+[DEBUG] 2 sem 2 up
+[DEBUG] 2 sem 0 up
+[DEBUG] 2 try sem 1 down
+(0, 2, DRAW) (10, -10)
+[DEBUG] 9 unlock mut 2
+[DEBUG] 9 unlock mut 0
+[DEBUG] 9 try sem 0 down
+[DEBUG] 9 sem 0 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 9 sem 2 down
+[DEBUG] 9 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 9 sem 1 up
+[DEBUG] 9 try lock 0
+[DEBUG] 9 lock mut 0
+[DEBUG] 3 sem 1 down
+[DEBUG] 3 try sem 2 down
+[DEBUG] 3 sem 2 down
+[DEBUG] 3 sem 2 up
+[DEBUG] 3 sem 0 up
+[DEBUG] 3 try sem 1 down
+[DEBUG] 9 try lock 4
+[DEBUG] 9 lock mut 4
+(1000, 1060) (0, 4, P1) (30, -30)
+[DEBUG] 9 unlock mut 4
+[DEBUG] 9 unlock mut 0
+[DEBUG] 9 try sem 0 down
+[DEBUG] 9 sem 0 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 9 sem 2 down
+[DEBUG] 9 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 9 sem 1 up
+[DEBUG] 9 try lock 4
+[DEBUG] 9 lock mut 4
+[DEBUG] 4 sem 1 down
+[DEBUG] 4 try sem 2 down
+[DEBUG] 4 sem 2 down
+[DEBUG] 4 sem 2 up
+[DEBUG] 4 sem 0 up
+[DEBUG] 4 try sem 1 down
+[DEBUG] 9 try lock 6
+[DEBUG] 9 lock mut 6
+(1030, 1010) (4, 6, DRAW) (-10, 10)
+[DEBUG] 9 unlock mut 6
+[DEBUG] 9 unlock mut 4
+[DEBUG] 9 try sem 0 down
+[DEBUG] 9 sem 0 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 9 sem 2 down
+[DEBUG] 9 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 9 sem 1 up
+[DEBUG] 9 try lock 0
+[DEBUG] 9 lock mut 0
+[DEBUG] 5 sem 1 down
+[DEBUG] 5 try sem 2 down
+[DEBUG] 5 sem 2 down
+[DEBUG] 9 try lock 7
+[DEBUG] 9 lock mut 7
+(1030, 940) [DEBUG] 5 sem 2 up
+[DEBUG] 5 sem 0 up
+[DEBUG] 5 try sem 1 down
+(0, 7, P1) (20, -20)
+[DEBUG] 9 unlock mut 7
+[DEBUG] 9 unlock mut 0
+[DEBUG] 9 try sem 0 down
+[DEBUG] 9 sem 0 down
+[DEBUG] 9 try sem 2 down
+[DEBUG] 9 sem 2 down
+[DEBUG] 9 sem 2 up
+[DEBUG] wakeup
+[DEBUG] 9 sem 1 up
+[DEBUG] 9 try lock 0
+[DEBUG] 9 lock mut 0
+[DEBUG] 9 try lock 0
+[DEBUG] 1 sem 1 down
+[DEBUG] 1 try sem 2 down
+[DEBUG] 1 sem 2 down
+[DEBUG] 1 sem 2 up
+[DEBUG] 1 sem 0 up
+[DEBUG] 1 try sem 1 down
