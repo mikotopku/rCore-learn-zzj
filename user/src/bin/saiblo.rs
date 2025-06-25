@@ -3,7 +3,7 @@
 #![allow(static_mut_refs)]
 
 use alloc::vec::Vec;
-use user_lib::{exit, gettid, mutex_create, mutex_lock, mutex_unlock, semaphore_create, semaphore_down, semaphore_up, thread_create, waittid};
+use user_lib::{exit, gettid, mutex_create, mutex_lock, mutex_unlock, semaphore_create, semaphore_down, semaphore_up, thread_create, waittid, yield_};
 
 #[macro_use]
 extern crate user_lib;
@@ -14,11 +14,12 @@ static mut PLAYS: usize = 0;
 static mut PLAYERS: usize = 0;
 static mut RESBUF: ResultBuf = ResultBuf::zero_init();
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum Res {
     P1,
     P2,
     DRAW,
+    End,
 }
 
 const BUFMAX: usize = 16;
@@ -26,7 +27,6 @@ struct ResultBuf {
     buf: [(usize, usize, Res); BUFMAX],
     head: usize,
     tail: usize,
-    len: usize,
     sem_rd: usize,
     sem_wr: usize,
     sem_mut: usize,
@@ -39,7 +39,6 @@ impl ResultBuf {
             buf: [(0, 0, Res::DRAW); BUFMAX],
             head: 0,
             tail: 0,
-            len: 0,
             sem_rd: 0,
             sem_wr: 0,
             sem_mut: 0,
@@ -51,7 +50,6 @@ impl ResultBuf {
             buf: [(0, 0, Res::DRAW); BUFMAX],
             head: 0,
             tail: 0,
-            len: 0,
             sem_rd: semaphore_create(0) as usize,
             sem_wr: semaphore_create(BUFMAX) as usize,
             sem_mut: semaphore_create(1) as usize,
@@ -61,49 +59,44 @@ impl ResultBuf {
     pub fn push(&mut self, res: (usize, usize, Res)) {
         semaphore_down(self.sem_wr);
         semaphore_down(self.sem_mut);
-        self.len += 1;
         self.buf[self.tail % BUFMAX] = res;
         self.tail += 1;
         semaphore_up(self.sem_mut);
         semaphore_up(self.sem_rd);
     }
     pub fn pop(&mut self) -> Option<(usize, usize, Res)> {
-        if self.len == 0 && self.is_finished() { 
-            return None;
-        }
         semaphore_down(self.sem_rd);
-        semaphore_up(self.sem_mut);
-        self.len -= 1;
+        semaphore_down(self.sem_mut);
         self.head += 1;
         let res = self.buf[(self.head - 1) % BUFMAX];
         semaphore_up(self.sem_mut);
         semaphore_up(self.sem_wr);
-        Some(res)
+        if res.2 == Res::End {
+            self.push_end();
+            None
+        } else {
+            Some(res)
+        }
     }
-    pub fn write_last(&mut self, res: (usize, usize, Res)) {
-        println!("last");
-        semaphore_down(self.sem_wr);
+    pub fn write_over(&mut self) {
         semaphore_down(self.sem_mut);
-        self.len += 1;
-        self.buf[self.tail % BUFMAX] = res;
-        self.tail += 1;
         self.unfinished -= 1;
+        if self.unfinished == 0 {
+            semaphore_up(self.sem_mut);
+            self.push_end();
+            return;
+        }
         semaphore_up(self.sem_mut);
-        semaphore_up(self.sem_rd);
     }
-    pub fn is_finished(&self) -> bool {
-        let res;
-        semaphore_down(self.sem_mut);
-        res = self.unfinished == 0;
-        semaphore_up(self.sem_mut);
-        res
+    fn push_end(&mut self) {
+        self.push((0, 0, Res::End));
     }
 }
 
 pub fn j(arg: usize) {
     println!("j");
     let mut n = arg;
-    for i in 0..unsafe{PLAYS} {
+    for _ in 0..unsafe{PLAYS} {
         n = n * n % 10007;
         let p1 = n % unsafe{PLAYERS};
         n = n * n % 10007;
@@ -112,13 +105,10 @@ pub fn j(arg: usize) {
         let w = if n % 3 == 0 { Res::P1 } else if n % 3 == 1 { Res::P2 } else {Res::DRAW};
         let res = if p1 > p2 { (p2, p1, w) } else { (p1, p2, w) };
         unsafe {
-            if i == PLAYS - 1 {
-                RESBUF.write_last(res);
-            } else {
-                RESBUF.push(res);
-            }
+            RESBUF.push(res);
         }
     }
+    unsafe { RESBUF.write_over(); }
     exit(0);
 }
 
@@ -147,7 +137,8 @@ pub fn u() {
                     if SCORE[res.0] < SCORE[res.1] { (10, -10) }
                     else if SCORE[res.0] > SCORE[res.1] { (-10, 10) }
                     else { (0, 0) }
-                }
+                },
+                Res::End => { panic!() },
             };
             print!("{:?} ", (SCORE[res.0], SCORE[res.1]));
             SCORE[res.0] += change.0;
